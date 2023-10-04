@@ -7,6 +7,7 @@ import { ReactComponent as Icon2 } from "../assets/check-box.svg";
 import { ReactComponent as Icon3 } from "../assets/people-alt.svg";
 import { ReactComponent as Icon4 } from "../assets/business-center.svg";
 import { ReactComponent as Icon5 } from "../assets/donut-small.svg";
+import { Button } from "../UI/Button";
 
 
 const mockup = [
@@ -16,6 +17,11 @@ const mockup = [
   { src: "/employees", text: "Сотрудники", Image: Icon4 },
   { src: "/statistics", text: "Статистика", Image: Icon5 },
 ];
+
+
+interface IMenuHeaderProps {
+  gap?: string
+}
 
 
 const Item = styled(NavLink)`
@@ -40,25 +46,37 @@ const Item = styled(NavLink)`
 
 const StyledMenu = styled.div`
   max-width: 206px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 28px;
   padding: 16px;
+  background-color: #F3F3F3;
 `;
+
+const MenuHeader = styled.div<IMenuHeaderProps>`
+  display: flex;
+  flex-direction: column;
+  gap: ${({gap}) => gap}
+`
 
 
 export const Menu = () => {
   return (
     <StyledMenu>
-      <img src={logo} alt="logo" height="32" width="123" />
-      <ul>
-        {mockup.map(({ src, text, Image }) => (
-          <Item key={src} to={src}>
-            <Image fill="#9A9C9C" />
-            {text}
-          </Item>
-        ))}
-      </ul>
+      <MenuHeader gap="28px">
+        <img src={logo} alt="logo" height="32" width="123" />
+        <ul>
+          {mockup.map(({ src, text, Image }) => (
+            <Item key={src} to={src}>
+              <Image fill="#9A9C9C" />
+              {text}
+            </Item>
+          ))}
+        </ul>
+      </MenuHeader>
+      <Button type='secondary'>🛈  Обратная связь</Button>
     </StyledMenu>
   );
 };
